@@ -16,12 +16,7 @@ namespace XmlParser
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionStringName = "SBMContext";
-
-            var connectionString =
-                    System.Configuration.ConfigurationManager.
-                    ConnectionStrings[connectionStringName].ConnectionString;
-            services.AddDbContext<SBMContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<SBMContext>(options => options.UseSqlServer());
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

@@ -12,8 +12,8 @@ using XmlParser;
 namespace XmlParser.Migrations
 {
     [DbContext(typeof(SBMContext))]
-    [Migration("20230215102241_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230303074938_DelDocument_LN_1C")]
+    partial class DelDocument_LN_1C
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace XmlParser.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN", b =>
+            modelBuilder.Entity("XmlParser.DTO.Document", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,23 +34,60 @@ namespace XmlParser.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DB_name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DbReplicaID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Document_LNId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Problem")
-                        .IsRequired()
+                    b.Property<string>("Form")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Schema")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Server_name")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UNID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Document_LNId");
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("XmlParser.DTO.Document_LN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DB_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DbReplicaID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Problem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Server_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -58,56 +95,7 @@ namespace XmlParser.Migrations
                     b.ToTable("Documents_LN");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN+Document", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DB_name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DbReplicaID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Document_LNId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Form")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Schema")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Server_name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UNID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Document_LNId");
-
-                    b.ToTable("Document");
-                });
-
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN+Document+Field", b =>
+            modelBuilder.Entity("XmlParser.DTO.FieldItemObject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +104,6 @@ namespace XmlParser.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Alias")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DocumentId")
@@ -127,42 +114,40 @@ namespace XmlParser.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Field");
+                    b.ToTable("Fields");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN+Document", b =>
+            modelBuilder.Entity("XmlParser.DTO.Document", b =>
                 {
-                    b.HasOne("XmlParser.DTO.Rootobject+Document_LN", null)
-                        .WithMany("document")
+                    b.HasOne("XmlParser.DTO.Document_LN", null)
+                        .WithMany("Documents")
                         .HasForeignKey("Document_LNId");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN+Document+Field", b =>
+            modelBuilder.Entity("XmlParser.DTO.FieldItemObject", b =>
                 {
-                    b.HasOne("XmlParser.DTO.Rootobject+Document_LN+Document", null)
-                        .WithMany("field")
+                    b.HasOne("XmlParser.DTO.Document", null)
+                        .WithMany("Fields")
                         .HasForeignKey("DocumentId");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN", b =>
+            modelBuilder.Entity("XmlParser.DTO.Document", b =>
                 {
-                    b.Navigation("document");
+                    b.Navigation("Fields");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN+Document", b =>
+            modelBuilder.Entity("XmlParser.DTO.Document_LN", b =>
                 {
-                    b.Navigation("field");
+                    b.Navigation("Documents");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,11 +17,11 @@ namespace XmlParser.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DB_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Problem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DbReplicaID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Server_name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DB_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Problem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DbReplicaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Server_name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,61 +29,61 @@ namespace XmlParser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Document",
+                name: "Documents",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Form = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UNID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Schema = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DB_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DbReplicaID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Server_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Form = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UNID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Schema = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DB_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DbReplicaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Server_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Document_LNId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Document", x => x.Id);
+                    table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Document_Documents_LN_Document_LNId",
+                        name: "FK_Documents_Documents_LN_Document_LNId",
                         column: x => x.Document_LNId,
                         principalTable: "Documents_LN",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Field",
+                name: "Fields",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Alias = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Item = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Alias = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Item = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DocumentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Field", x => x.Id);
+                    table.PrimaryKey("PK_Fields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Field_Document_DocumentId",
+                        name: "FK_Fields_Documents_DocumentId",
                         column: x => x.DocumentId,
-                        principalTable: "Document",
+                        principalTable: "Documents",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Document_Document_LNId",
-                table: "Document",
+                name: "IX_Documents_Document_LNId",
+                table: "Documents",
                 column: "Document_LNId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Field_DocumentId",
-                table: "Field",
+                name: "IX_Fields_DocumentId",
+                table: "Fields",
                 column: "DocumentId");
         }
 
@@ -91,10 +91,10 @@ namespace XmlParser.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Field");
+                name: "Fields");
 
             migrationBuilder.DropTable(
-                name: "Document");
+                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "Documents_LN");

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using static XmlParser.SBMContext;
+using XmlParser.Parsers;
 
 namespace XmlParser
 {
@@ -7,16 +10,11 @@ namespace XmlParser
     {
         static void Main(string[] args)
         {
-            Parser parser = new Parser();
+            var sbmContext = new SBMContext(new DbContextOptions<SBMContext>());
 
-            BuildWebHost(args).Run();
+            var parser = new GenericParser(sbmContext);
 
             parser.Parse();
         }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
     }
 }

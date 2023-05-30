@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XmlParser;
 
@@ -11,9 +12,11 @@ using XmlParser;
 namespace XmlParser.Migrations
 {
     [DbContext(typeof(SBMContext))]
-    partial class SBMContextModelSnapshot : ModelSnapshot
+    [Migration("20230215122322_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace XmlParser.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("XmlParser.DTO.Document", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +67,7 @@ namespace XmlParser.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Document_LN", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,15 +90,12 @@ namespace XmlParser.Migrations
                     b.Property<string>("Server_name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("VersionId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.ToTable("Documents_LN");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.FieldItemObject", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Field", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +110,6 @@ namespace XmlParser.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Item")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -126,26 +125,26 @@ namespace XmlParser.Migrations
                     b.ToTable("Fields");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Document", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document", b =>
                 {
-                    b.HasOne("XmlParser.DTO.Document_LN", null)
+                    b.HasOne("XmlParser.DTO.Rootobject+Document_LN", null)
                         .WithMany("Documents")
                         .HasForeignKey("Document_LNId");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.FieldItemObject", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Field", b =>
                 {
-                    b.HasOne("XmlParser.DTO.Document", null)
+                    b.HasOne("XmlParser.DTO.Rootobject+Document", null)
                         .WithMany("Fields")
                         .HasForeignKey("DocumentId");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Document", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document", b =>
                 {
                     b.Navigation("Fields");
                 });
 
-            modelBuilder.Entity("XmlParser.DTO.Document_LN", b =>
+            modelBuilder.Entity("XmlParser.DTO.Rootobject+Document_LN", b =>
                 {
                     b.Navigation("Documents");
                 });

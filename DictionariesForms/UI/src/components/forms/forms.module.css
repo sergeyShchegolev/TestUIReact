@@ -1,0 +1,108 @@
+.editbtn {
+  width: 128;
+  height: 24;
+  background: #3A8319;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+.dictlist{
+position: absolute;
+width: 129px;
+height: 231px;
+left: 290px;
+top: 123px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 33px;
+/* or 206% */
+
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+.dictElement{
+
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  /* or 157% */
+
+  color: #8E8E8E;
+}
+.dictElementName{
+
+  width: 180px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  /* or 157% */
+  
+  
+  color: #000000;
+
+}
+.leftBar{
+  position: absolute;
+  width: 244px;
+  height: 26px;
+  left: 7px;
+  top: 7px;
+
+  background: #626262;
+  border: 1px solid #9E9E9E;
+}
+.delBtn{
+  width: 128px;
+  height: 24px;
+  background: #AB3830;
+  border-radius: 3px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+
+  color: #FFFFFF;
+}
+.updBtn{
+  width: 128px;
+  height: 24px;
+  background: #3A8319;
+  border-radius: 3px;
+
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+
+  color: #FFFFFF;
+}
+.createBtn{
+width: 81px;
+height: 24px;
+
+background: #525252;
+border-radius: 3px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+}

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static XmlParser.DTO.Rootobject;
+using XmlParser.DTO;
 
-namespace DataAccess.Interfaces
+namespace XmlParser.Interfaces
 {
     public interface IDocument_LNRepository : IDisposable
     {
